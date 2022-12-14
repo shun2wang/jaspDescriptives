@@ -12,7 +12,7 @@ jobs:
 
   unit-tests:
 
-    uses: jasp-stats/jasp-actions/.github/workflows/unittests.yml@master
+    uses: shun2wang/jasp-actions/.github/workflows/unittests.yml@fixUnittestOnLinux
     with:
       needs_JAGS:   false
       needs_igraph: false
