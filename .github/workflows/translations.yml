@@ -16,7 +16,7 @@ jobs:
       R_REPO: jaspdescriptives-r
 
     steps:
-      - uses: jasp-stats/jasp-actions/wlcLock@master
+      # - uses: jasp-stats/jasp-actions/wlcLock@master
 
-      - uses: jasp-stats/jasp-actions/translations@master
+      - uses: shun2wang/jasp-actions/translations@testI18n
 
