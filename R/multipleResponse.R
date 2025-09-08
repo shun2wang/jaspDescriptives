@@ -4,7 +4,7 @@
 
 multipleResponse <- function(jaspResults, dataset, options){
 
-  ready <- (length(options$multipleResponseVariables) > 0)
+  ready <- length(options$multipleResponseVariables) > 0 #multiple response right?
 
   if (ready) {
     dataset <- .multipleResponseData(dataset, options)
@@ -26,14 +26,12 @@ multipleResponse <- function(jaspResults, dataset, options){
 
 .multipleResponseData <- function(dataset, options){
 
-  if (!is.null(dataset)) {
+  if (!is.null(dataset))
     return(dataset)
 
-  }else{
+  dataset <- .readDataSetToEnd(columns.as.factor = options$multipleResponseVariables)
 
-    return(.readDataSetToEnd(columns.as.factor = options$multipleResponseVariables))
-  }
-
+  return(dataset)
 }
 
 
@@ -73,14 +71,24 @@ multipleResponse <- function(jaspResults, dataset, options){
 .multipleResponseTableFillMain <- function(multipleResponseTable, dataset, options){
 
   numOfResponse <- sum(dataset == options$responseValue, na.rm=TRUE)
-  responsePerCol <- 111 #colSums(dataset == options$responseValue, na.rm=TRUE)
-  numOfCases <- 222 #sum(!apply(apply(dataset, 1, is.na), 2, all))
+  responsePerCol <- colSums(dataset == options$responseValue, na.rm=TRUE)
+
+  if( length(options$responseValue) == 1 ) {
+    responsePerCol <- numOfResponse
+    names(responsePerCol) <- options$responseValue[1]
+    numOfCases <- sum(!is.na(dataset))
+  } else {
+    responsePerCol = colSums(dataset == options$responseValue, na.rm = TRUE)
+    numOfCases = sum(!apply(apply(dataset, 1, is.na), 2, all))
+  }
+
+  # numOfCases <- sum(!apply(apply(dataset, 1, is.na), 2, all))
   totals <- as.numeric(c(responsePerCol, numOfResponse));
 
   multipleResponseTable[["validOfResponse"]] <- numOfResponse
   multipleResponseTable[["total"]] <- totals
-  multipleResponseTable[["percentOfResponses"]]<- (totals/numOfResponse)*100
-  multipleResponseTable[["percentOfCases"]]<- (totals/numOfCases)*100
+  multipleResponseTable[["percentOfResponses"]]<- (totals/numOfResponse) * 100
+  multipleResponseTable[["percentOfCases"]]<- (totals/numOfCases) * 100
 
   return()
 }

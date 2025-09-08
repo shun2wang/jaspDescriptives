@@ -50,4 +50,12 @@ Description
 		preloadData	: false
 
 	}
+	Analysis
+	{
+		title:  qsTr("Multiple Response (beta)")
+		qml:   	"multipleResponse.qml"
+		func:	"multipleResponse"
+		preloadData	: false
+
+	}
 }
