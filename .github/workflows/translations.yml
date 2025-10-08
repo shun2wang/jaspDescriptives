@@ -12,6 +12,7 @@ jobs:
     env:
       REPO_KEY: ${{ secrets.REPOS_KEY }}
       WEBLATE_KEY: ${{ secrets.WEBLATE_KEY }}
+      GH_TOKEN: ${{ github.token }}
       QML_REPO: jaspdescriptives-qml
       R_REPO: jaspdescriptives-r
 
