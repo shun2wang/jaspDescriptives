@@ -42,4 +42,10 @@ Description
 		preloadData	: false
 
 	}
+
+	Analysis
+	{
+		title:  qsTr("Multiple Response Analysis")
+		func:   "MultipleResponseAnalysis"
+	}
 }
